@@ -6,6 +6,10 @@ import { useEffect, useState } from 'react';
 import { useTranslation } from "react-i18next";
 import { ButtonPrimary } from '../button/Button';
 import { Controller, useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
+import { useAppDispatch, useAppSelector } from '../../hooks/rtkHooks';
+import { SignUpUserProps, UpdateUserProps } from '../../model/user.model';
+import { signupUser, clearState, updateUser } from '../../store/slices/userSlice';
 // import toast from 'react-hot-toast';
 // import { useAppDispatch, useAppSelector } from '../../hooks/rtkHooks';
 // import { SignUpUserProps, UpdateUserProps } from '../../model/user.model';
@@ -88,7 +92,7 @@ export default function EditModal(props: Props) {
   
     if (savedUser) {
       console.log('Updated successfully:', savedUser);
-      window.location.reload();
+      // window.location.reload();
     } else {
       console.error('Failed to save user');
     }
@@ -98,35 +102,35 @@ export default function EditModal(props: Props) {
     setRole(e.target.value === 'admin');
   };
 
-  // const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
 
-  // const { isSuccess, isError, errorMessage } = useAppSelector(state => state.user);
-  // const {
-  //   control,
-  //   handleSubmit,
-  //   formState: { errors }
-  // } = useForm<SignUpUserProps>();
+  const { isSuccess, isError, errorMessage } = useAppSelector(state => state.user);
+  const {
+    control,
+    handleSubmit,
+    formState: { errors }
+  } = useForm<SignUpUserProps>();
 
-  // const onSubmit = (data: SignUpUserProps) => {
-  //   dispatch(signupUser(data));
-  // };
+  const onSubmit = (data: SignUpUserProps) => {
+    dispatch(signupUser(data));
+  };
 
-  // React.useEffect(() => {
-  //   return () => {
-  //     dispatch(clearState());
-  //   };
-  // }, []);
+  React.useEffect(() => {
+    return () => {
+      dispatch(clearState());
+    };
+  }, []);
 
-  // React.useEffect(() => {
-  //   if (isSuccess) {
-  //     console.log("asdfasdfasdf");
-  //     dispatch(clearState());
-  //   }
-  //   if (isError) {
-  //     toast.error(errorMessage);
-  //     dispatch(clearState());
-  //   }
-  // }, [isSuccess, isError]);
+  React.useEffect(() => {
+    if (isSuccess) {
+      console.log("asdfasdfasdf");
+      dispatch(clearState());
+    }
+    if (isError) {
+      toast.error(errorMessage);
+      dispatch(clearState());
+    }
+  }, [isSuccess, isError]);
 
   return (
     <Dialog
@@ -154,13 +158,13 @@ export default function EditModal(props: Props) {
           textAlign: "center"
         }}>
           {/* <form noValidate autoComplete="on" onSubmit={handleSubmit(onSubmit)} method="POST"> */}
-          <form noValidate autoComplete="on">
+          <form noValidate autoComplete="on" onSubmit={handleSubmit(onSubmit)} method="POST">
             <Grid container padding={3}>
               <Grid item xs={12} paddingBottom={1}>
                 <Stack sx={{ justifyContent: "space-between", alignItems: "center" }} direction={"row"}>
                   <Typography>{t("CRUD.Name")}:</Typography>
-                  <TextField id="name" label={t("CRUD.Name")} value={name} onChange={(e) => setName(e.target.value)} />
-                  {/* <Controller
+                  {/* <TextField id="name" label={t("CRUD.Name")} value={name} onChange={(e) => setName(e.target.value)} /> */}
+                  <Controller
                     control={control}
                     name="username"
                     defaultValue=""
@@ -177,13 +181,31 @@ export default function EditModal(props: Props) {
                       }} />
                     )}
                   />
-                  {errors?.username && <p>{errors.username.message}</p>} */}
+                  {errors?.username && <p>{errors.username.message}</p>}
                 </Stack>
               </Grid>
               <Grid item xs={12} paddingBottom={1}>
                 <Stack sx={{ justifyContent: "space-between", alignItems: "center" }} direction={"row"}>
                   <Typography>{t("CRUD.Email")}:</Typography>
-                  <TextField id="email" label={t("CRUD.Email")} value={email} onChange={(e) => setEmail(e.target.value)} />
+                  {/* <TextField id="email" label={t("CRUD.Email")} value={email} onChange={(e) => setEmail(e.target.value)} /> */}
+                  <Controller
+                    control={control}
+                    name="email"
+                    defaultValue=""
+                    render={({ field: { onChange, value } }) => (
+                      // <InputRegister
+                      //   value={value}
+                      //   onChange={onChange}
+                      //   placeholder="Email"
+                      //   type="text"
+                      // />
+                      <TextField type='email' id="email" label={t("CRUD.Email")} value={value} onChange={(e) => {
+                        onChange(e)
+                        setEmail(e.target.value)
+                      }} />
+                    )}
+                  />
+                  {errors?.email && <p>{errors.email.message}</p>}
                 </Stack>
               </Grid>
               <Grid item xs={12} paddingBottom={1}>
@@ -213,7 +235,24 @@ export default function EditModal(props: Props) {
               <Grid item xs={12} paddingBottom={1}>
                 <Stack sx={{ justifyContent: "space-between", alignItems: "center" }} direction={"row"}>
                   <Typography>{t("CRUD.Password")}:</Typography>
-                  <TextField id="password" label={t("CRUD.Password")} value={password} onChange={(e) => setPassword(e.target.value)} />
+                  {/* <TextField id="password" label={t("CRUD.Password")} value={password} onChange={(e) => setPassword(e.target.value)} /> */}
+                  <Controller
+                    control={control}
+                    name="password"
+                    defaultValue=""
+                    render={({ field: { onChange, value } }) => (
+                      // <InputRegister
+                      //   value={value}
+                      //   onChange={onChange}
+                      //   placeholder="Password"
+                      //   type="password"
+                      // />
+                      <TextField type='password' id="password" label={t("CRUD.Password")} value={value} onChange={(e) => {
+                        onChange(e)
+                        setPassword(e.target.value)
+                      }} />
+                    )}
+                  />
                 </Stack>
               </Grid>
               
@@ -233,7 +272,7 @@ export default function EditModal(props: Props) {
                 </Stack>
               </Grid>
             </Grid>
-            <ButtonPrimary variant="contained" color="primary" onClick={handleSave}>
+            <ButtonPrimary variant="contained" color="primary" onClick={handleSave} type='submit'>
             {t("CRUD.Save")}
           </ButtonPrimary>
           </form>

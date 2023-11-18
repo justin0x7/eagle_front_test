@@ -45,7 +45,7 @@ export const signupUser = createAsyncThunk<any, SignUpUserProps, AsyncThunkConfi
         setStorageValue("token", token);
         return { ...data, username, email };
       } else {
-        return thunkAPI.rejectWithValue(data);
+        // return thunkAPI.rejectWithValue(data);
       }
     } catch (e: any) {
       console.log("Error", e.response.data);
