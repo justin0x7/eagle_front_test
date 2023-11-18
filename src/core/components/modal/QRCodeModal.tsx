@@ -18,14 +18,17 @@ export default function QRCodeModal(props: Props) {
   const { t } = useTranslation();
 
   const jsonString = atob(atob(atob(props.uri)));
-  const person: PersonIndex = jsonString ? JSON.parse(jsonString).person : 1;
+  const occasion: PersonIndex = jsonString ? JSON.parse(jsonString).occasion : 1;
   
   let modalTitle: string;
   if (props.domain === QUESTIONNAIRES_URL) {
-    modalTitle = person === 1 ? t("Word.Child")
-      : t("Word.Guardian") + (person === 2 ? " 1" : " 2");
+    modalTitle = occasion === 1 ? t("Word.month0")
+      : modalTitle = occasion === 2 ? t("Word.month6")
+        : t("Word.month12")
   } else {
-    modalTitle = t("Word.Self");
+    modalTitle = occasion === 1 ? t("Word.month0")
+      : modalTitle = occasion === 2 ? t("Word.month6")
+        : t("Word.month12")
   }
 
   return (
