@@ -393,7 +393,7 @@ export default function BackgroundDataSurveyPage() {
                       )}
 
                     </FormGroup>
-                    {metaData.entitiesData.filter(basicDataUnit => basicDataUnit.description === "OtherText").map((basicDataUnit, index) => (
+                    {/* {metaData.entitiesData.filter(basicDataUnit => basicDataUnit.description === "OtherText").map((basicDataUnit, index) => (
                       <TextField
                         key={index}
                         label={t("Default.Other")}
@@ -403,7 +403,7 @@ export default function BackgroundDataSurveyPage() {
                         disabled={!formData[metaData.entityName][(metaData.entitiesData.find((entity) => entity.description === 'Other')?.id ? Number(metaData.entitiesData.find((entity) => entity.description === 'Other')?.id) : 1)]}
                         onChange={e => handleChangeTextField(metaData.entityName, basicDataUnit.id.toString(), e.target.value)}
                       />
-                    ))}
+                    ))} */}
                   </>
                 )}
               </FormControl>

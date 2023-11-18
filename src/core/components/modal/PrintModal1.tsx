@@ -145,7 +145,7 @@ class ComponentToPrint1 extends React.Component<Props> {
           <Grid container sx={{ justifyContent: "space-between", position: "relative", top: "420px", right: "5px", paddingRight: "15px", paddingLeft: "15px" }}>
             <Stack direction="row">
               <img src={footerLogo}></img>
-              <Typography sx={{ fontSize: "12px", fontWeight: "800", paddingTop: "20px" }}>ÖPPENVÅRDEN BARN OCH FAMILJ</Typography>
+              <Typography sx={{ fontSize: "12px", fontWeight: "800", paddingTop: "20px" }}>ÖPPENVÅRDEN VUXEN</Typography>
             </Stack>
             <Stack direction="row">
               <Stack direction="column" alignItems="right">
