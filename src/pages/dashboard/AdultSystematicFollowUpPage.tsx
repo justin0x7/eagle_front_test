@@ -384,7 +384,7 @@ export default function AdultSystematicFollowUpPage() {
                   <Paper elevation={6} sx={{ borderRadius: "100%", width: "120px", height: "120px", padding: "16px" }}>
                     <Stack justifyContent="center" alignItems="center" height="100%">
                       <Typography color="text.secondary" fontWeight="medium" variant="h6">VAS</Typography>
-                      <Typography color="info.main" fontWeight="600" variant='h5'>{filterResult[filter].ors}</Typography>
+                      <Typography color="info.main" fontWeight="600" variant='h5'>{filterResult[filter].ors} %</Typography>
                       {/* <StatusCircle variant="large" status={filterResult[filter].status} /> */}
                     </Stack>
                   </Paper>
