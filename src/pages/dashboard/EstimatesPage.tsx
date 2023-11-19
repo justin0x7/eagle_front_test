@@ -138,7 +138,7 @@ export default function EstimatesPage() {
       codeNumber: codenumber,
     })))));
     setShowQRCodeModal(true);
-    setQrcodeUriDomain("https://imp.vallentuna.eagle.productions");
+    setQrcodeUriDomain("https://test.imp.vallentuna.eagle.productions");
   };
 
   const handleClickFillOutFollowUpSurvey = () => {
