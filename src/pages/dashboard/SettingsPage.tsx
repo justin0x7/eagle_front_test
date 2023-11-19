@@ -191,7 +191,7 @@ export default function SettingsPage() {
     <DashboardLayout>
       {role && (
         <NavLink to={adminPath()} >
-          <ToggleOnIcon />{t("AdminPage.GoToAdminPage", { ns: "AdminPage" })}
+          <ToggleOnIcon />{t("AdminPage.GoToAdminPage", { ns: "AdminPage" })}asdfsadfsdsd
         </NavLink>
       )}
 
