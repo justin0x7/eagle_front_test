@@ -71,19 +71,19 @@ export default function ProfileModal(props: Props) {
     setRole(e.target.value === 'admin');
   };
 
-  const handleSave = async () => {
-    if (!name || !title || !department || !address || !phone || !email) {
-      alert('All fields are required');
-      return;
-    }
-    const savedContact = await saveProfile(name, role, title, department, address, phone, email, password);
-    if (savedContact) {
-      console.log('Contact saved successfully:', savedContact);
-      // window.location.reload();
-    } else {
-      console.error('Failed to save contact');
-    }
-  };
+  // const handleSave = async () => {
+  //   if (!name || !title || !department || !address || !phone || !email) {
+  //     alert('All fields are required');
+  //     return;
+  //   }
+  //   const savedContact = await saveProfile(name, role, title, department, address, phone, email, password);
+  //   if (savedContact) {
+  //     console.log('Contact saved successfully:', savedContact);
+  //     // window.location.reload();
+  //   } else {
+  //     console.error('Failed to save contact');
+  //   }
+  // };
 
   // register
 
@@ -97,8 +97,18 @@ export default function ProfileModal(props: Props) {
     formState: { errors }
   } = useForm<SignUpUserProps>();
 
-  const onSubmit = (data: SignUpUserProps) => {
-    dispatch(signupUser(data));
+  const onSubmit = async (data: SignUpUserProps) => {
+    if (!name || !title || !department || !address || !phone || !email) {
+      alert('All fields are required');
+      return;
+    }
+    const savedContact = await saveProfile(name, role, title, department, address, phone, email, password);
+    if (savedContact) {
+      console.log('Contact saved successfully:', savedContact);
+      dispatch(signupUser(data));
+    } else {
+      console.error('Failed to save contact');
+    }
   };
 
   React.useEffect(() => {
@@ -309,7 +319,7 @@ export default function ProfileModal(props: Props) {
                 </Stack>
               </Grid>
             </Grid>
-            <ButtonPrimary type='submit' variant="contained" color="primary" onClick={handleSave}>
+            <ButtonPrimary type='submit' variant="contained" color="primary">
               {t("CRUD.Save")}
             </ButtonPrimary>
           </form>
