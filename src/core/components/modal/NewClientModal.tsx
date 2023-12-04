@@ -37,7 +37,7 @@ export default function NewClientModal(props: Props) {
   const { t } = useTranslation();
   const { username } = useAppSelector(state => state.user);
   const [valueShowableButton, setValueShowableButton] = React.useState(false);
-  const strCodeNumber = `${props.choose}${props.strNumber}`;
+  const strCodeNumber = `${props.choose}${dayjs().format("YYYY")}-${props.strNumber}`;
   const [closeStatusEntity, setCloseStatusEntity] = useState<CloseStatusEntity>();
 
   const handleClickBackgroundSurvey = () => {

@@ -190,13 +190,18 @@ export default function SettingsPage() {
   return (
     <DashboardLayout>
       {role && (
-        <NavLink to={adminPath()} >
-          <ToggleOnIcon />{t("AdminPage.GoToAdminPage", { ns: "AdminPage" })}
-        </NavLink>
+        <Stack direction="row" justifyContent={'space-between'}>
+          <NavLink to={adminPath()} >
+            <ToggleOnIcon />{t("AdminPage.GoToAdminPage", { ns: "AdminPage" })}
+          </NavLink>
+          <Stack marginTop={3}>
+            <img width={40} src={eagle}></img>
+          </Stack>
+        </Stack>
       )}
 
       {scoreCount !== null ? (
-        <Box sx={{ width: '100%', paddingTop: " 100px" }}>
+        <Box sx={{ width: '100%', paddingTop: " 50px" }}>
 
           <Grid container spacing={3}>
 
@@ -336,18 +341,9 @@ export default function SettingsPage() {
                 </CardContent>
               </Card>
             </Grid>
-            <Grid item md={6} >
+            {/* <Grid item md={6} >
               <Card sx={{ borderRadius: "20px", padding: "8px" }}>
                 <CardContent>
-                  {/* <Grid container>
-                  <Grid item md={2}>
-                    <img src={eagle}></img>
-                  </Grid>
-                  <Grid item md={10}>
-                    <Typography fontWeight="medium" variant="h5" sx={{ lineHeight: 2 }}><MarkunreadIcon />Info@vallentuna.se</Typography>
-                    <Typography fontWeight="medium" variant="h5" sx={{ lineHeight: 2 }}><PhoneIcon />070-123 45 67</Typography>
-                  </Grid>
-                </Grid> */}
                   <Stack direction="row" gap={2} alignItems="center">
                     <Stack>
                       <img src={eagle}></img>
@@ -366,7 +362,7 @@ export default function SettingsPage() {
                   </Grid>
                 </CardContent>
               </Card>
-            </Grid>
+            </Grid> */}
           </Grid>
         </Box>
       ) : (

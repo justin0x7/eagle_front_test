@@ -159,16 +159,28 @@ interface Props {
 export default function DashboardLayout({ children }: Props) {
   const [openNewClientModal, setOpenNewClientModal] = useState(false);
   const [choose, setChoose] = useState('');
-  const strNumber = `${dayjs().format("YYYY")}-${dayjs().unix()}`;
+  const { caseList: bofList } = useAppSelector(state => state.caseListSurvey);
+  const { caseList: vuxList } = useAppSelector(state => state.caseListAdultSurvey);
+  const [strNumber, setStrNumber] = useState("")
+  var lastCodeNum = ""
+  var lastCodeNum1 = ""
+  if (bofList[bofList.length - 1]) {
+    lastCodeNum = (parseInt(bofList[bofList.length - 1].codeNumber.split("-")[1]) + 1).toString();
+  }
+  if (vuxList[vuxList.length - 1]) {
+    lastCodeNum1 = (parseInt(vuxList[vuxList.length - 1].codeNumber.split("-")[1]) + 1).toString();
+  }
 
   function resetNewClientModal() {
     setOpenNewClientModal(true);
     setChoose("Bof");
+    setStrNumber(lastCodeNum);
   }
 
   function resetNewClientModal1() {
     setOpenNewClientModal(true);
     setChoose("Vux");
+    setStrNumber(lastCodeNum1);
   }
 
   return (
